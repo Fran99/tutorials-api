@@ -1,13 +1,22 @@
 const jwt = require('jsonwebtoken');
 
-const createToken = (data = {}) => {
-  console.log(1);
-  return jwt.sign(data, 'thesecret');
-};
+// TODO set the secret key
+const secret = 'thesecret';
+const createToken = (data = {}, expiresIn = '2h') => new Promise((resolve, reject) => {
+  jwt.sign(data, secret, { expiresIn }, (err, token) => {
+    if (err) reject(err);
+    resolve(token);
+  });
+});
 
-const validateToken = 1;
+const verifyToken = (token) => new Promise((resolve, reject) => {
+  jwt.verify(token, secret, (err, decoded) => {
+    if (err) reject(err);
+    resolve(decoded);
+  });
+});
 
 module.exports = {
   createToken,
-  validateToken,
+  verifyToken,
 };
