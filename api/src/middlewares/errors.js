@@ -1,5 +1,6 @@
 const { ValidationError } = require('sequelize');
 const { AuthenticationError } = require('../errors/AuthenticationError');
+const { AuthorizationError } = require('../errors/AuthorizationError');
 
 /**
  *
@@ -10,6 +11,8 @@ const { AuthenticationError } = require('../errors/AuthenticationError');
  */
 const customErrors = (err, req, res, next) => {
   if (err instanceof AuthenticationError) return res.status(err.code).end();
+
+  if (err instanceof AuthorizationError) return res.status(err.code).end();
 
   if (err instanceof ValidationError) {
     return res.status(400).json({
