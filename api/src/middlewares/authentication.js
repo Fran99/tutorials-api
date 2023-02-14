@@ -1,7 +1,13 @@
 const { AuthenticationError } = require('../errors/AuthenticationError');
 const jwt = require('../jwt');
-const { User } = require('../../models').sequelize.models;
 
+/**
+ * Authentication middleware
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise<*>}
+ */
 module.exports.authentication = async (req, res, next) => {
   try {
     const bearer = req.headers.authorization?.split(' ')[1];
@@ -9,9 +15,8 @@ module.exports.authentication = async (req, res, next) => {
     if (!token) return next(new AuthenticationError());
     const { iat, exp, ...me } = token;
     req.me = me;
+    return next();
   } catch (e) {
-    next(new AuthenticationError(e));
+    return next(new AuthenticationError(e));
   }
-  // req.user = await User.find;
-  return next();
 };

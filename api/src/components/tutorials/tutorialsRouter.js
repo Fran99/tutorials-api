@@ -1,55 +1,31 @@
 const express = require('express');
+const {
+  getToken, create, list, show, update, del,
+} = require('./tutorialsController');
+const { tutorialCreation } = require('../../middlewares/tutorialCreationMiddleware');
 
 const router = express.Router();
 
-const tutorials = [];
-let id = 1;
+/**
+ * Route to get a temp token for tutorials creation.
+ */
+router.get('/token', getToken);
 
-router.get('/create', (req, res) => {
-  res.json({
-    code: 200,
-    data: 'thisisthetoken2',
-  });
-});
+/**
+ * Route to create a new tutorial.
+ */
+router.post('/', tutorialCreation, create);
 
-router.post('/', (req, res) => {
-  id += 1;
-  tutorials.push(
-    {
-      id,
-      ...req.body,
-    },
-  );
-  res.json({
-    code: 201,
-    data: req.body,
-  });
-});
+/**
+ * List all the available tutorials
+ */
+router.get('/', list);
 
-router.get('/', (req, res) => {
-  res.json({
-    code: 200,
-    data: tutorials,
-  });
-});
+router.get('/:id', show);
 
-router.get('/:id', (req, res) => {
-  res.json({
-    code: 200,
-    data: tutorials.find((t) => t.id === parseInt(req.params.id, 10)),
-  });
-});
+router.put('/:id', update);
 
-router.put('/:id', (req, res) => {
-  res.json({
-    code: 200,
-    data: req.params.id,
-  });
-});
-
-router.delete('/:id', (req, res) => {
-  res.status(204).end();
-});
+router.delete('/:id', del);
 
 module.exports = {
   tutorialsRouter: router,

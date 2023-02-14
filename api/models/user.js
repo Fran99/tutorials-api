@@ -1,7 +1,7 @@
 const {
   Model,
 } = require('sequelize');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -14,8 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static attributes() {
-      return ['id', 'name', 'lastname'];
+    parse() {
+      return {
+        id: this.id,
+        name: this.name,
+        lastname: this.lastname,
+        email: this.email,
+        isAdmin: this.isAdmin,
+      };
     }
   }
   User.init({
@@ -26,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
         notNull: {
           msg: 'Please enter your name',
         },
+        isAlphanumeric: {
+          msg: 'Please enter a alphanumeric values only',
+        },
       },
     },
     lastname: {
@@ -34,6 +43,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: {
           msg: 'Please enter your lastname',
+        },
+        isAlphanumeric: {
+          msg: 'Please enter alphanumeric values only',
         },
       },
     },
@@ -68,12 +80,15 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       set(value) {
-        this.setDataValue('password', bcrypt.hashSync(value, 10));
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(value, salt);
+        this.setDataValue('password', hash);
       },
     },
   }, {
     sequelize,
     modelName: 'User',
+    tableName: 'users',
   });
   return User;
 };
