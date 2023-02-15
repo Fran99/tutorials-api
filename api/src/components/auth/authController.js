@@ -46,7 +46,7 @@ module.exports = {
       return next(new AuthenticationError());
     }
 
-    const token = await createToken(user.parse());
+    const token = await createToken({ id: user.id });
 
     return res.json({
       code: 200,

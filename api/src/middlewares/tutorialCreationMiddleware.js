@@ -8,7 +8,7 @@ const { verifyToken } = require('../jwt');
  * @param next
  * @returns {*}
  */
-module.exports.tutorialCreation = async (req, res, next) => {
+module.exports.tutorialCreationMiddleware = async (req, res, next) => {
   try {
     const creationToken = req.headers['authentication-token'];
     if (!await verifyToken(creationToken)) throw new Error();
