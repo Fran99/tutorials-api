@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./bin/www",
+    "dev": "DEBUG=tutorials-api:server nodemon ./bin/www",
     "start": "node ./bin/www",
     "lint": "eslint ./src --ext .js"
   },
