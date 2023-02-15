@@ -4,9 +4,9 @@ const logger = require('morgan');
 const helmet = require('helmet');
 const { tutorialsRouter } = require('./src/components/tutorials/tutorialsRouter');
 const { authRouter } = require('./src/components/auth/authRouter');
-const { authenticationMiddleware } = require('./src/middlewares/authentication');
-const { authorizationMiddleware } = require('./src/middlewares/authorization');
-const { customErrors } = require('./src/middlewares/errors');
+const { authenticationMiddleware } = require('./src/middlewares/authenticationMiddleware');
+const { authorizationMiddleware } = require('./src/middlewares/authorizationMiddleware');
+const { customErrors } = require('./src/middlewares/customErrorsMiddleware');
 const { sequelize } = require('./models/index');
 
 const app = express();

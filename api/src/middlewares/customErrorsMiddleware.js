@@ -9,7 +9,7 @@ const { AuthorizationError } = require('../errors/AuthorizationError');
  * @param {Object} res
  * @param {Function} next
  */
-const customErrors = (err, req, res, next) => {
+module.exports.customErrors = (err, req, res, next) => {
   if (err instanceof AuthenticationError
       || err instanceof AuthorizationError) return res.status(err.code).end();
 
@@ -22,8 +22,4 @@ const customErrors = (err, req, res, next) => {
   }
 
   return next();
-};
-
-module.exports = {
-  customErrors,
 };

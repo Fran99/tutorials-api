@@ -1,6 +1,6 @@
+const { Op } = require('sequelize');
 const { createToken } = require('../../jwt');
 const { Tutorial } = require('../../../models').sequelize.models;
-const { Op } = require('sequelize');
 
 module.exports = {
   /**
@@ -42,7 +42,7 @@ module.exports = {
         data: tutorial.parse(),
       });
     } catch (e) {
-      next(e);
+      return next(e);
     }
   },
 

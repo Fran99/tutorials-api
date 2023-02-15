@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
+    /**
+     * Returns the appropriate Tutorial data to the client.
+     * @returns {{videoURL: *, publishedStatus: *, description, id, title}}
+     */
     parse() {
       return {
         id: this.id,

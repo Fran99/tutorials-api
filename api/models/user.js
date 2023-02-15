@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
+    /**
+     * Returns the appropriate User data to the client.
+     * @returns {{name, id, isAdmin: *, email: *, lastname: *}}
+     */
     parse() {
       return {
         id: this.id,

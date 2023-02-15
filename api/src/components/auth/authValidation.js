@@ -20,7 +20,8 @@ const signUpSchema = Joi.object({
   email: Joi.string()
     .email()
     .required(),
-  password: Joi.string().required(),
+  password: Joi.string()
+    .required(),
   isAdmin: Joi.boolean(),
 });
 
@@ -28,7 +29,8 @@ const signInSchema = Joi.object({
   email: Joi.string()
     .email()
     .required(),
-  password: Joi.string().required(),
+  password: Joi.string()
+    .required(),
 });
 
 module.exports = {
