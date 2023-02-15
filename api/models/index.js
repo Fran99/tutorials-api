@@ -3,11 +3,13 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const mysql = require('mysql2');
+const chance = require('chance').Chance();
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require('../config/config.json')[env];
 
+config.host = process.env.MYSQL_HOST;
 const db = {};
 
 let sequelize;
@@ -37,8 +39,9 @@ Object.keys(db).forEach((modelName) => {
 });
 
 sequelize.run = async () => {
+  if (process.env.NODE_ENV === 'production') return;
   const connection = mysql.createConnection({
-    host: config.host,
+    host: process.env.MYSQL_HOST,
     user: config.username,
     password: config.password,
   });
@@ -47,6 +50,25 @@ sequelize.run = async () => {
     async (err) => {
       if (err) throw new Error('There was a problem trying to create the database');
       await sequelize.sync({ force: true });
+
+      // Create test tutorials
+      const tutorials = [];
+      for (let i = 0; i < 200; i += 1) {
+        tutorials.push(sequelize.models.Tutorial.create({
+          title: chance.sentence({ words: 5 }),
+          description: chance.paragraph({ sentences: 4 }),
+          videoURL: chance.url(),
+          publishedStatus: ['draft', 'pending', 'published'][chance.integer({ min: 0, max: 2 })],
+        }));
+      }
+      await Promise.all(tutorials);
+      await sequelize.models.User.create({
+        name: 'Super',
+        lastname: 'Admin',
+        email: 'admin@admin.com',
+        isAdmin: true,
+        password: 'admin',
+      });
     },
   );
 };
