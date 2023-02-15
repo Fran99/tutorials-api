@@ -8,15 +8,15 @@ REST API that enables authenticated users to create, update, list and delete tut
 - MySQL
 
 ### Main Dependencies 
-- helmet [^1]
-- joi
-- jsonwebtoken
-- mysql2
-- sequelize
-- morgan
-- bcrypt
-- eslint (dev)
-- nodemon (dev)
+- Helmet [^1]
+- joi [^2]
+- jsonwebtoken [^3]
+- mysql2 [^4]
+- sequelize [^5]
+- morgan [^6]
+- bcryptjs [^7]
+- eslint (dev) [^8]
+- nodemon (dev) [^9]
 
 ### Endpoints:
 
@@ -41,5 +41,12 @@ REST API that enables authenticated users to create, update, list and delete tut
 - [Tutorials API Documentation](https://documenter.getpostman.com/view/5451117/2s93CExGdf)
 
 
-[^1]: My reference.
-
+- [^1] Helmet helps you secure your Express apps by setting various HTTP headers.
+- [^2] Validator for input data.
+- [^3] JWT implementation.
+- [^4] MySQL driver.
+- [^5] ORM to be used with MySQL.
+- [^6] HTTP request logger middleware.
+- [^7] Bcrypt package used to hash/verify passwords.
+- [^8]
+- [^9]
