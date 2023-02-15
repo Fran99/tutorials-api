@@ -1,0 +1,33 @@
+version: '3'
+services:
+  #Nginx server
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '3000:80'
+  # MySQL server
+  mysql:
+    image: mysql:latest
+    volumes:
+      - tutorials-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  # API Server
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    environment:
+      NODE_ENV: development
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DB: tutorials
+volumes:
+  tutorials-mysql-data:
