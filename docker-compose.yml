@@ -1,33 +1,28 @@
-version: '3'
+version: '3.9'
 services:
-  #Nginx server
-  nginx:
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
-    ports:
-      - '3000:80'
   # MySQL server
   mysql:
     image: mysql:latest
-    volumes:
-      - tutorials-mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "tutorials"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
   # API Server
   api:
     build:
       dockerfile: Dockerfile.dev
       context: ./api
+    depends_on:
+      mysql:
+        condition: service_started
+    ports:
+      - '3000:3000'
     volumes:
       - /app/node_modules
       - ./api:/app
+    restart: on-failure
     environment:
       NODE_ENV: development
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DB: tutorials
-volumes:
-  tutorials-mysql-data:
+      MYSQL_HOSTNAME: mysql
+      MYSQL_USERNAME: "root"
+      MYSQL_PASSWORD: ""
+      MYSQL_DB_NAME: "tutorials"

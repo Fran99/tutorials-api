@@ -37,7 +37,7 @@ module.exports = {
     try {
       const tutorial = await Tutorial.create(req.body);
 
-      res.status(201).json({
+      return res.status(201).json({
         code: 201,
         data: tutorial.parse(),
       });

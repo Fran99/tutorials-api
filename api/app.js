@@ -7,12 +7,12 @@ const { authRouter } = require('./src/components/auth/authRouter');
 const { authenticationMiddleware } = require('./src/middlewares/authentication');
 const { authorizationMiddleware } = require('./src/middlewares/authorization');
 const { customErrors } = require('./src/middlewares/errors');
-const db = require('./models/index');
+const { sequelize } = require('./models/index');
 
 const app = express();
 
 (async () => {
-  await db.sequelize.run();
+  await sequelize.sync({ force: true });
 })();
 
 app.use([
