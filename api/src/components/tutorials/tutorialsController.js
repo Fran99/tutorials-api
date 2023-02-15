@@ -1,9 +1,10 @@
+const { Op } = require('sequelize');
 const { createToken } = require('../../jwt');
 const { Tutorial } = require('../../../models').sequelize.models;
 
 module.exports = {
   /**
-   * Issue a token to create a tutorial
+   * Issues a token to create a tutorial
    * @param req
    * @param res
    * @param next
@@ -26,7 +27,7 @@ module.exports = {
   },
 
   /**
-   *
+   * Creates a new tutorial
    * @param req
    * @param res
    * @param next
@@ -36,17 +37,17 @@ module.exports = {
     try {
       const tutorial = await Tutorial.create(req.body);
 
-      res.status(201).json({
+      return res.status(201).json({
         code: 201,
         data: tutorial.parse(),
       });
     } catch (e) {
-      next(e);
+      return next(e);
     }
   },
 
   /**
-   *
+   * Lists all available tutorials
    * @param req
    * @param res
    * @param next
@@ -54,7 +55,30 @@ module.exports = {
    */
   async list(req, res, next) {
     try {
-      const tutorials = (await Tutorial.findAll()).map((tutorial) => tutorial.parse());
+      const defaultCondition = [{
+        id: {
+          [Op.not]: null,
+        },
+      }];
+      const conditions = [];
+      ['title', 'description'].forEach((param) => {
+        if (req.query[param]) {
+          conditions.push({
+            [param]: {
+              [Op.like]: `%${req.query[param]}%`,
+            },
+          });
+        }
+      });
+
+      const tutorials = (await Tutorial.findAll({
+        where: {
+          [Op.or]: (conditions.length ? conditions : defaultCondition),
+        },
+        order: [
+          ['id', (req.query.order === 'desc' ? 'DESC' : 'ASC')],
+        ],
+      })).map((tutorial) => tutorial.parse());
 
       return res.json({
         code: 200,
@@ -66,7 +90,7 @@ module.exports = {
   },
 
   /**
-   *
+   * Retrieves a single tutorial
    * @param req
    * @param res
    * @param next
@@ -75,6 +99,7 @@ module.exports = {
   async show(req, res, next) {
     try {
       const tutorial = await Tutorial.findByPk(req.params.id);
+      if (!tutorial) return res.status(404).end();
       return res.json({
         code: 200,
         data: tutorial.parse(),
@@ -85,7 +110,7 @@ module.exports = {
   },
 
   /**
-   *
+   * Updates a tutorial
    * @param req
    * @param res
    * @param next
@@ -97,6 +122,7 @@ module.exports = {
           id: req.params.id,
         },
       });
+      if (!result[0]) return res.status(404).end();
       return res.status(204).end();
     } catch (e) {
       return next(e);
@@ -104,7 +130,25 @@ module.exports = {
   },
 
   /**
-   *
+   * Deletes all tutorials
+   * @param req
+   * @param res
+   * @param next
+   * @returns {Promise<*>}
+   */
+  async massDelete(req, res, next) {
+    try {
+      await Tutorial.destroy({
+        truncate: true,
+      });
+      return res.status(204).end();
+    } catch (e) {
+      return next(e);
+    }
+  },
+
+  /**
+   * Deletes a tutorial
    * @param req
    * @param res
    * @param next

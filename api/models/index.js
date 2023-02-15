@@ -2,11 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
-const mysql = require('mysql2');
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config.json')[env];
+const config = require('../config/config')[env];
 
 const db = {};
 
@@ -35,21 +34,6 @@ Object.keys(db).forEach((modelName) => {
     db[modelName].associate(db);
   }
 });
-
-sequelize.run = async () => {
-  const connection = mysql.createConnection({
-    host: config.host,
-    user: config.username,
-    password: config.password,
-  });
-  connection.query(
-    `CREATE DATABASE IF NOT EXISTS ${config.database}`,
-    async (err) => {
-      if (err) throw new Error('There was a problem trying to create the database');
-      await sequelize.sync({ force: true });
-    },
-  );
-};
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

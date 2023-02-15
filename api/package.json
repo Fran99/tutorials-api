@@ -1,6 +1,6 @@
 {
   "name": "tutorial-api",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "nodemon ./bin/www",
@@ -19,13 +19,10 @@
     "sequelize": "^6.28.0"
   },
   "devDependencies": {
-    "chai": "^4.3.7",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
-    "mocha": "^10.2.0",
     "nodemon": "^2.0.20",
-    "sequelize-cli": "^6.6.0",
-    "supertest": "^6.3.3"
+    "sequelize-cli": "^6.6.0"
   }
 }
