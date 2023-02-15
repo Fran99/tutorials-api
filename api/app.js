@@ -12,7 +12,12 @@ const { sequelize } = require('./models/index');
 const app = express();
 
 (async () => {
-  await sequelize.sync({ force: true });
+  try {
+    await sequelize.sync({ force: true });
+  } catch (e) {
+    console.log('No database connection...');
+    process.exit(1);
+  }
 })();
 
 app.use([
