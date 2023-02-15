@@ -27,40 +27,19 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter a title',
-        },
-      },
     },
     videoURL: {
       type: DataTypes.STRING(512),
       allowNull: false,
-      validate: {
-        notNull: {
-          msg: 'Please enter a video URL',
-        },
-        isUrl: {
-          msg: 'Please enter a valid URL',
-        },
-      },
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: true,
-      validate: {
-        isAlphanumeric: {
-          msg: 'Please enter a alphanumeric values only',
-        },
-      },
     },
     publishedStatus: {
       type: DataTypes.STRING(16),
       allowNull: true,
       defaultValue: 'draft',
-      validate: {
-        isIn: [['draft', 'pending', 'published']],
-      },
     },
   }, {
     sequelize,
