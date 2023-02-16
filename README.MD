@@ -1,6 +1,22 @@
 # Tutorials REST API
 REST API that enables authenticated users to create, update, list and delete tutorials.
 
+### How to run it?
+###### The most efficient way is trough docker composer
+```
+git clone https://github.com/Fran99/tutorials-api.git tutorials
+```
+
+```
+cd tutorials
+```
+
+```
+docker-compose up
+```
+
+###### The API is set to run on http://localhost:3000
+
 ### Stack
 - Node.js
 - Express.js
@@ -48,5 +64,5 @@ REST API that enables authenticated users to create, update, list and delete tut
 - [^5]: ORM to be used with MySQL.
 - [^6]: HTTP request logger middleware.
 - [^7]: Bcrypt package used to hash/verify passwords
-- [^8]
-- [^9]
+- [^8]: A tool for identifying and reporting on patterns found in JavaScript code.
+- [^9]: A tool that helps develop applications by automatically restarting the node application when file changes in the directory are detected.
