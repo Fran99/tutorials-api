@@ -41,12 +41,12 @@ REST API that enables authenticated users to create, update, list and delete tut
 - [Tutorials API Documentation](https://documenter.getpostman.com/view/5451117/2s93CExGdf)
 
 
-- [^1] Helmet helps you secure your Express apps by setting various HTTP headers.
-- [^2] Validator for input data.
-- [^3] JWT implementation.
-- [^4] MySQL driver.
-- [^5] ORM to be used with MySQL.
-- [^6] HTTP request logger middleware.
-- [^7] Bcrypt package used to hash/verify passwords.
+- [^1]: Helmet helps you secure your Express apps by setting various HTTP headers.
+- [^2]: Validator for input data.
+- [^3]: JWT implementation.
+- [^4]: MySQL driver.
+- [^5]: ORM to be used with MySQL.
+- [^6]: HTTP request logger middleware.
+- [^7]: Bcrypt package used to hash/verify passwords
 - [^8]
 - [^9]
