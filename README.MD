@@ -48,5 +48,5 @@ REST API that enables authenticated users to create, update, list and delete tut
 - [^5]: ORM to be used with MySQL.
 - [^6]: HTTP request logger middleware.
 - [^7]: Bcrypt package used to hash/verify passwords
-- [^8]
-- [^9]
+- [^8]: A tool for identifying and reporting on patterns found in JavaScript code.
+- [^9]: A tool that helps develop applications by automatically restarting the node application when file changes in the directory are detected.
