@@ -55,14 +55,12 @@ docker-compose up
 - [VIDEO - CRUD Operations in Postman](https://www.youtube.com/watch?v=SrKxb5bmM-A)
 - [VIDEO - Test Runner in Postman](https://www.youtube.com/watch?v=z0-P6lOZFeQ)
 - [Tutorials API Documentation](https://documenter.getpostman.com/view/5451117/2s93CExGdf)
+- [Postman collection](api/collection-tutorials-rest-api.json)
 
-
-<<<<<<< Updated upstream
-=======
 
 
 ---
->>>>>>> Stashed changes
+
 - [^1]: Helmet helps you secure your Express apps by setting various HTTP headers.
 - [^2]: Validator for input data.
 - [^3]: JWT implementation.
