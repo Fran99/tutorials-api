@@ -1,6 +1,22 @@
 # Tutorials REST API
 REST API that enables authenticated users to create, update, list and delete tutorials.
 
+### How to run it?
+###### The most efficient way is trough docker composer
+```
+git clone https://github.com/Fran99/tutorials-api.git tutorials
+```
+
+```
+cd tutorials
+```
+
+```
+docker-compose up
+```
+
+###### The API is set to run on http://localhost:3000
+
 ### Stack
 - Node.js
 - Express.js
