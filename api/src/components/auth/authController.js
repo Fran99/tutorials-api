@@ -6,7 +6,7 @@ const { User } = require('../../../models').sequelize.models;
 module.exports = {
 
   /**
-   *
+   * Controller to process the user signup
    * @param {Object} req
    * @param {Object} res
    * @param {Function} next
@@ -28,7 +28,7 @@ module.exports = {
   },
 
   /**
-   *
+   * Controller to process the user signin
    * @param req
    * @param res
    * @param next
@@ -36,7 +36,6 @@ module.exports = {
    */
   async signIn(req, res, next) {
     const { email, password } = req.body;
-    // TODO validate this data
 
     const user = await User.findOne({
       where: { email },
