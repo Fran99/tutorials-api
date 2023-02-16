@@ -60,13 +60,12 @@ docker-compose up
 
 
 ---
-
-- [^1]: Helmet helps you secure your Express apps by setting various HTTP headers.
-- [^2]: Validator for input data.
-- [^3]: JWT implementation.
-- [^4]: MySQL driver.
-- [^5]: ORM to be used with MySQL.
-- [^6]: HTTP request logger middleware.
-- [^7]: Bcrypt package used to hash/verify passwords
-- [^8]: A tool for identifying and reporting on patterns found in JavaScript code.
-- [^9]: A tool that helps develop applications by automatically restarting the node application when file changes in the directory are detected.
+[^1]: Helmet helps you secure your Express apps by setting various HTTP headers.
+[^2]: Validator for input data.
+[^3]: JWT implementation.
+[^4]: MySQL driver.
+[^5]: ORM to be used with MySQL.
+[^6]: HTTP request logger middleware.
+[^7]: Bcrypt package used to hash/verify passwords
+[^8]: A tool for identifying and reporting on patterns found in JavaScript code.
+[^9]: A tool that helps develop applications by automatically restarting the node application when file changes in the directory are detected.
