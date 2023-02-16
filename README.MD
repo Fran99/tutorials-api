@@ -57,8 +57,6 @@ docker-compose up
 - [Tutorials API Documentation](https://documenter.getpostman.com/view/5451117/2s93CExGdf)
 - [Postman collection](api/collection-tutorials-rest-api.json)
 
-
-
 ---
 [^1]: Helmet helps you secure your Express apps by setting various HTTP headers.
 [^2]: Validator for input data.
